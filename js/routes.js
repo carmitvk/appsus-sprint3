@@ -2,6 +2,8 @@ import homePage from './pages/home-page.cmp.js'
 import emailApp from './apps/email/pages/email-app.cmp.js'
 import about from './pages/about.cmp.js'
 import emailDetails from '../js/apps/email/cmps/email-details.cmp.js'
+import emailCompose from '../js/apps/email/cmps/email-compose.cmp.js'
+
 
 const routes = [
     {
@@ -27,6 +29,10 @@ const routes = [
     {
         path: '/email/:emailId',
         component: emailDetails
+    },
+    {
+        path: '/compose',
+        component: emailCompose
     },
 ]
 

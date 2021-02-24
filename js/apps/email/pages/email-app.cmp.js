@@ -7,7 +7,7 @@ export default {
     template: `
         <section class="email-app app-main">
             <div class="actions">
-                <button>+compose</button>
+                <button @click="openCompose">+compose</button>
             </div>
             <div class="list-container">
                 <!-- <email-filter @filtered="setFilter" @searchInEmail="searchInEmail"></email-filter> -->
@@ -41,6 +41,9 @@ export default {
         },
         setFilter(filterBy) {
             this.filterBy = filterBy;
+        },
+        openCompose(){
+            this.$router.replace({ path: `/compose` })
         },
 
     },

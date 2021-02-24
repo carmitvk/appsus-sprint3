@@ -9,10 +9,13 @@
 
 }
 
-.home-sub-title, nav{
+nav{
     font-family: Pacifico;
+    color:rgb(8, 8, 8);
 }
-
+.home-sub-title{
+    font-family: RicksAmericanNF;
+}
 .home-title, .logo{
     font-family: disko_ot;
 }

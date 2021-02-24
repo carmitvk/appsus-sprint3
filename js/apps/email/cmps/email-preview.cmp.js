@@ -43,7 +43,6 @@ export default {
             this.$emit('removeEmail', emailId);
         },
         openEmail(){
-            // this.$router.push(`/details/${this.email.id}`);
             this.$router.replace({ path: `/email/${this.email.id}` })
         }
 

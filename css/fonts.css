@@ -7,9 +7,13 @@
     font-family: disko_ot;
     src: url(../fonts/disko_ot.otf);
 }
+@font-face {
+    font-family: RicksAmericanNF;
+    src: url(../fonts/RicksAmericanNF.ttf);
+}
 
 
 @font-face {
-    font-family: RicksAmericanNF;
+    font-family: RicksAmericanNFO;
     src: url(../fonts/RicksAmericanNF.otf);
 }
