@@ -8,9 +8,9 @@ var gUnreadEmails=2;
 
 const INBOX_EMAILS_KEY = 'inbox_emails'
 const gInboxEmails = [
-                    {id:'XXXXX', subject: 'Wassap?',  body: 'Pick up!',      isRead: false, isStar:false, sentAt : 1551133930594},
-                    {id:'YYYYY', subject: 'Hi there', body: 'where are you', isRead: true,  isStar:true,  sentAt : 1551133930594},
-                    {id:'ZZZZZ', subject: 'Hello',    body: 'long time',     isRead: false, isStar:false, sentAt : 1551133930594}
+                    {id:'XXXXX', subject: 'Wassap?',  body: 'Hurry To Pick up!',      isRead: false, isStar:false, sentAt : 1551133930594},
+                    {id:'YYYYY', subject: 'Team meeting for the two teams', body: 'where are you? long time no seen', isRead: true,  isStar:true,  sentAt : 1551133930594},
+                    {id:'ZZZZZ', subject: 'Hello from me',    body: 'long time',     isRead: false, isStar:false, sentAt : 1551133930594}
 ];
 
 
@@ -24,7 +24,7 @@ export const emailService = {
   getPrevEmailId,
   markAsUnread,
   markAsRead,
-
+  // queryCurrent,
 }
 
 
@@ -41,7 +41,7 @@ function query() {
 }
 
 function remove(emailId) {
-  storageService.remove(INBOX_EMAILS_KEY, emailId);
+  return storageService.remove(INBOX_EMAILS_KEY, emailId);
 }
 
 function save(email) {

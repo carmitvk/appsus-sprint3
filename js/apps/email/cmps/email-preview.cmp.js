@@ -6,10 +6,12 @@ export default {
         <section class="email-preview grid" @click="openEmail">
             <span v-if="email.isStar" @click="toggleStar">★</span>
             <span v-if="!email.isStar" @click="toggleStar">✰</span>
-            <span @click="removeEmail">🗑</span>
+            <span @click="removeEmail($event,email.id)">🗑</span>
             <span v-if="email.isRead" @click="toggleRead">💌</span>
             <span v-if="!email.isRead" @click="toggleRead">📧</span>
             <p>{{email.subject}}</p>
+            <p>{{sentData}}</p>
+
         </section>
         
         `,
@@ -20,7 +22,9 @@ export default {
         },
 
     computed:{
-
+        sentData(){
+            return new  Date(this.email.sentAt).toLocaleString()
+        },
         // ☆  ✰ ⭐ ✉ 📨 ✉️ 💌 📧
         
     },
@@ -32,9 +36,9 @@ export default {
         toggleRead(email){
             // this.$emit('updateStar', email)
         },
-        removeEmail(email){
+        removeEmail($event,emailId){
             //if sure , emit
-            // this.$emit('removeEmail', email)
+            this.$emit('removeEmail', emailId)
         },
         openEmail(email){
             //rout details here???

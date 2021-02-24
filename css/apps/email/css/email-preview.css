@@ -1,16 +1,19 @@
 .email-preview-container{
-    /* display: flex; */
+    margin-bottom: 10px;
 }
 
 .email-preview{
-    width:70%;
-    -webkit-box-shadow: 5px 5px 6px -2px #000000; 
-    box-shadow: 5px 5px 6px -2px #000000;
+    width:100%;
+    align-items: center;
+    /* -webkit-box-shadow: 5px 5px 6px -2px #000000; 
+    box-shadow: 5px 5px 6px -2px #000000; */
+    border-bottom: 1px solid gray;
 }
 
 
 .grid{
     display: grid;
-    grid-template-columns: 60px 60px 60px auto;
+    grid-template-columns: 40px 40px 40px auto 150px;
     grid-auto-rows: auto;
+    gap:10px;
 }

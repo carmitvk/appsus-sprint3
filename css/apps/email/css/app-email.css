@@ -1,0 +1,19 @@
+
+.email-app{
+    display:flex;
+    flex-direction: row;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.actions{
+    display: flex;
+    flex-direction: column;
+    flex-basis:20%;
+    padding:20px;
+}
+
+.list-container{
+    flex-basis:80%;
+    padding:20px;
+}
