@@ -11,7 +11,7 @@ export default {
             </div>
             <div class="list-container">
                 <!-- <email-filter @filtered="setFilter" @searchInEmail="searchInEmail"></email-filter> -->
-                <email-list :emails="emailsToShow" @removeEmail="removeEmail"/>
+                <email-list :emails="emailsToShow" @removeEmail="removeEmail" @updateStar="updateStar" @updateRead="updateRead"/>
                 <!-- <router-link to="/email/edit">compose</router-link> -->
             </div>
         </section>
@@ -26,17 +26,19 @@ export default {
         removeEmail(emailId) {
             emailService.remove(emailId)
                 .then(()=>this.loadEmails())
-                // .then(()=>this.loadCurrEmails())
         },
-
+        updateStar(emailId){
+            emailService.updateStar(emailId)
+            .then(()=>this.loadEmails())
+        },
+        updateRead(emailId){
+            emailService.updateRead(emailId)
+            .then(()=>this.loadEmails())
+        },
         loadEmails() {
             emailService.query()
                 .then(emails => this.emails = emails)
         },
-        // loadCurrEmails() {
-        //     emailService.queryCurrent()
-        //         .then(emails => this.emails = emails)
-        // },
         setFilter(filterBy) {
             this.filterBy = filterBy;
         },

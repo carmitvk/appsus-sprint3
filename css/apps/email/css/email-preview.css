@@ -13,7 +13,13 @@
 
 .grid{
     display: grid;
-    grid-template-columns: 40px 40px 40px auto 150px;
+    grid-template-columns: 40px 40px 40px auto;
     grid-auto-rows: auto;
     gap:10px;
+}
+
+.preview-txt{
+    display:flex;
+    width: 100%;
+    justify-content: space-between;
 }
