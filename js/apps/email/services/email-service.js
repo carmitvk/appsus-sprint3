@@ -1,15 +1,16 @@
 
 
-import { storageService } from '../../../services/async-storage-service'
-import { utilService } from '../../../services/util-service'
+import { storageService } from '../../../services/async-storage-service.js'
+import { utilService } from '../../../services/util-service.js'
 
 
+var gUnreadEmails=2;
 
 const INBOX_EMAILS_KEY = 'inbox_emails'
-const gEmails = [
-                    {id:'XXXXX', subject: 'Wassap?',  body: 'Pick up!',      isRead: false, sentAt : 1551133930594},
-                    {id:'YYYYY', subject: 'Hi there', body: 'where are you', isRead: true,  sentAt : 1551133930594},
-                    {id:'ZZZZZ', subject: 'Hello',    body: 'long time',     isRead: false, sentAt : 1551133930594}
+const gInboxEmails = [
+                    {id:'XXXXX', subject: 'Wassap?',  body: 'Pick up!',      isRead: false, isStar:false, sentAt : 1551133930594},
+                    {id:'YYYYY', subject: 'Hi there', body: 'where are you', isRead: true,  isStar:true,  sentAt : 1551133930594},
+                    {id:'ZZZZZ', subject: 'Hello',    body: 'long time',     isRead: false, isStar:false, sentAt : 1551133930594}
 ];
 
 
@@ -21,17 +22,18 @@ export const emailService = {
   getById,
   getNextEmailId,
   getPrevEmailId,
+  markAsUnread,
+  markAsRead,
+
 }
-
-
 
 
 function query() {
   return storageService.query(INBOX_EMAILS_KEY)
     .then(emails=> {
       if (!emails||!emails.length){
-        emails = gEmails;
-        utilService.saveToStorage(INBOX_EMAILS_KEY,gEmails)
+        emails = gInboxEmails;
+        utilService.saveToStorage(INBOX_EMAILS_KEY,gInboxEmails)
       }
     //   return Promise.resolve(email);
     return emails;
@@ -59,18 +61,17 @@ function getById(id) {
   return storageService.get(INBOX_EMAILS_KEY, id)
 }
 
-// function _createEmails() {
-//   let emails = utilService.loadFromStorage(INBOX_EMAILS_KEY)
-//   if (!emails || !emails.length) {
-//     emails=[
-//         {}
 
-//     ]
+function markAsUnread(id){
+    gInboxEmails[id].isRead = false;
+    gUnreadEmails++;
+}
 
-//     utilService.saveToStorage(INBOX_EMAILS_KEY, emails)
-//   }
-//   return emails;
-// }
+function markAsRead(id){
+    gInboxEmails[id].isRead = true;
+    gUnreadEmails--;
+}
+
 
 
 

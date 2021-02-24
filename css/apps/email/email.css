@@ -1,4 +1,14 @@
 
+@import "css/app-email.css";
+@import "css/app-header.css";
+@import "css/email-list.css";
+@import "css/email-preview.css";
+@import "css/home-page.css";
 
+
+.app-main {
+    background-color: lightblue;
+    min-height: 90vh;
+}
 
 

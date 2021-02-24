@@ -1,0 +1,16 @@
+.email-preview-container{
+    /* display: flex; */
+}
+
+.email-preview{
+    width:70%;
+    -webkit-box-shadow: 5px 5px 6px -2px #000000; 
+    box-shadow: 5px 5px 6px -2px #000000;
+}
+
+
+.grid{
+    display: grid;
+    grid-template-columns: 60px 60px 60px auto;
+    grid-auto-rows: auto;
+}

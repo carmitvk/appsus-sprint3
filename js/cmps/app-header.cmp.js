@@ -2,8 +2,8 @@
 export default {
     template: `
    <header class="app-header">
-        <div class="logo">
-            <h1>Appsus</h1>
+        <div class="hdr">
+            <h1 class="logo">Appsus</h1>
         </div>
         <nav>
             <router-link active-class="active-link" to="/" exact>Home</router-link> |

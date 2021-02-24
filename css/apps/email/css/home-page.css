@@ -1,0 +1,18 @@
+.home-page{
+    background-image: url('../../../img/images2.jpg');
+    background-size:cover;
+    font-size:40px;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.home-sub-title, nav{
+    font-family: Pacifico;
+}
+
+.home-title, .logo{
+    font-family: disko_ot;
+}

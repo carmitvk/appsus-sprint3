@@ -1,0 +1,10 @@
+/* HEADER */
+.app-header{
+    background-color: rgb(201, 171, 193);
+    padding: 10px;
+    height: 11vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 22px;
+}

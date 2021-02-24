@@ -1,3 +1,5 @@
+@import "./fonts.css";
+@import "./apps/email/email.css";
 
 *{
     box-sizing: border-box;
@@ -7,10 +9,7 @@ h1, h2, h3, h4, h5, h6, p {
     margin: 0;
 }
 
-.app-main {
-    background-color: lightblue;
-    min-height: 90vh;
-}
+
 
 /* USER - MSG */
 .user-msg {
@@ -20,16 +19,7 @@ h1, h2, h3, h4, h5, h6, p {
     right: 0;
 }
 
-/* HEADER */
-.app-header{
-    background-color: rgb(201, 171, 193);
-    padding: 10px;
-    height: 11vh;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 22px;
-}
+
 
 /* ROUTES */
 
@@ -46,17 +36,5 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 
-.home-page{
-    background-image: url('../../../img/images2.jpg');
-    background-size:cover;
-    font-size:40px;
-    display:flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
 
-}
 
-.home-title{
-
-}
