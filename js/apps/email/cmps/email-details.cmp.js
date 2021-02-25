@@ -3,6 +3,7 @@ import { emailService } from "../services/email-service.js";
 export default {
     template: `
             <section v-if="email" class="email-details" >
+                <button class="btn" title="Reply" @click="reply">↷</button>
                 <div>Subject: {{email.subject}}</div>
                 <div>From: {{email.from}}</div>
                 <div>To: {{email.to}}</div>
@@ -16,6 +17,11 @@ export default {
     data() {
         return {
             email: null,
+        }
+    },
+    methods:{
+        reply(){
+            this.$router.replace({ path: `/email/reply/${this.email.id}` })
         }
     },
     computed:{

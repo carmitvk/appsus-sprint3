@@ -11,4 +11,8 @@
     min-height: 90vh;
 }
 
-
+.btn{
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: rgb(204, 196, 201);;
+}

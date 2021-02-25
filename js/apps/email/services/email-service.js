@@ -8,9 +8,9 @@ var gUnreadEmails=2;
 
 const INBOX_EMAILS_KEY = 'inbox_emails'
 const gInboxEmails = [
-                    {id:'XXXXX', subject: 'Wassap?',  body: 'Hurry To Pick up!',      isRead: false, isStar:false, sentAt : 1551133930594,from:'Nati Golan',to:'Yoni Dalal'},
-                    {id:'YYYYY', subject: 'Team meeting for the two teams', body: 'where are you? long time no seen. we have a team meeting for the two teams.you re invited', isRead: true,  isStar:true,  sentAt : 1551133930594,from:'Shlomi Levi',to:'Ronit Band'},
-                    {id:'ZZZZZ', subject: 'Hello from me',    body: 'long time',     isRead: false, isStar:false, sentAt : 1551133930594,from:'Elad Davidi',to:'Miri Cohen'}
+                    {id:'XXXXX', subject: 'Wassap?',  body: 'Hurry To Pick up!',      isRead: false, isStar:false, sentAt : 1551133930594,from:'Nati Golan',to:'Yoni Dalal',isInbox:true},
+                    {id:'YYYYY', subject: 'Team meeting for the two teams', body: 'where are you? long time no seen. we have a team meeting for the two teams.you re invited', isRead: true,  isStar:true,  sentAt : 1551133930594,from:'Shlomi Levi',to:'Ronit Band',isInbox:true},
+                    {id:'ZZZZZ', subject: 'Hello from me',    body: 'long time',     isRead: false, isStar:false, sentAt : 1551133930594,from:'Elad Davidi',to:'Miri Cohen',isInbox:true}
 ];
 
 
@@ -40,6 +40,7 @@ function query() {
 }
 
 function remove(emailId) {
+  gUnreadEmails--;
   return storageService.remove(INBOX_EMAILS_KEY, emailId);
 }
 
@@ -69,12 +70,13 @@ function save(email) {
   if (email.id) { //edit
     return storageService.put(INBOX_EMAILS_KEY, email)
   } else {
-    return storageService.post(INBOX_EMAILS_KEY, email)
+    gUnreadEmails++;
+    return storageService.post(INBOX_EMAILS_KEY, email)//new
   }
 }
 
 function getEmptyEmail() { //for compose
-  return {id:utilService.makeId(), subject: 'subject', body: 'Email body', isRead: false, isStar:false, sentAt : 1551133930594,from:'Default Sender',to:'Default Reciever'}
+  return {id:utilService.makeId(), subject: 'subject', body: 'Email body', isRead: false, isStar:false, sentAt : 1551133930594,from:'Default Sender',to:'Default Reciever',isInbox:false}
 }
 
 
@@ -103,6 +105,10 @@ function _markAsRead(id){
 
 function getUnreadCount(){
   return gUnreadEmails
+}
+
+function increaseUnreadCount(){
+  gUnreadEmails++;
 }
 
 

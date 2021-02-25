@@ -7,7 +7,8 @@ export default {
     template: `
         <section class="email-app app-main">
             <div class="actions">
-                <button @click="openCompose">+compose</button>
+                <div>You have {{unreadCount}} unread emails</div>
+                <button class="btn" @click="openCompose">+compose</button>
             </div>
             <div class="list-container">
                 <!-- <email-filter @filtered="setFilter" @searchInEmail="searchInEmail"></email-filter> -->
@@ -20,6 +21,7 @@ export default {
         return {
             emails: [],
             filterBy: null,
+            unreadCount:0,
         }
     },
     methods: {
@@ -62,8 +64,8 @@ export default {
 
     },
     created() {
-        console.log('email created');
         this.loadEmails();
+        this.unreadCount = emailService.getUnreadCount();
     },
     components: {
         // emailFilter,

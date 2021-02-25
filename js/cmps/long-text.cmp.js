@@ -4,7 +4,7 @@ export default {
             <section class="ong-text">
                 <p v-if="!isAllDescShown">Description: {{getDescription}}</p>
                 <p v-else>Description: {{txt}}</p>
-                <button v-if="txt.length>100" @click="toggleDesc">Read <span>{{moreOrLess}}</span>...</button>
+                <button v-if="txt.length>100" class="btn" @click="toggleDesc">Read <span>{{moreOrLess}}</span>...</button>
             </section>
     `,
     data() {

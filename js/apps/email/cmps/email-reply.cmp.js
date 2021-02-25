@@ -4,11 +4,11 @@ import { eventBus } from  "../../../services/event-bus-service.js";
 
 export default {
     template: `
-            <section class="email-compose">
+            <section v-if="origEmail" class="email-reply">
             <form @submit.prevent="save">
-                <input type="text" placeholder="Subject: " v-model="emailToAdd.subject">
-                <input type="text" placeholder="To: " v-model="emailToAdd.to">
-                <textarea name="email-body:    " rows="10" cols="500" v-model="emailToAdd.body"></textarea>
+                <div>To: {{replyEmail.to}}</div>
+                <div>Subject: {{replyEmail.subject}}</div>
+                <textarea name="email-body:    " rows="10" cols="500" v-model="replyEmail.body"></textarea>
                 <button class="btn">Send</button>
             </form>
             </section>
@@ -16,7 +16,8 @@ export default {
 
     data() {
         return {
-            emailToAdd: {
+            origEmail:null,
+            replyEmail: {
                 subject: 'subject',
                 body: 'Email body',
                 isRead: false,
@@ -33,7 +34,8 @@ export default {
                 .then(emails => this.emails = emails)
         },
         save() {
-            emailService.save(this.emailToAdd)
+            this.replyEmail.body =  'Orig Message was: '.concat(this.origEmail.body);
+            emailService.save(this.replyEmail)
                 .then(email => {
                     const msg = {
                         txt: 'email saved succesfully',
@@ -53,12 +55,17 @@ export default {
                 })
         },
     },  
+    computed:{
+
+    },
     created() {
-        // const id = this.$route.params.emailId;
-        // emailService.getById(id)
-        //     .then((email) => {
-        //         this.email = email;
-        //     })
+        const id = this.$route.params.emailId;
+        emailService.getById(id)
+            .then((email) => {
+                this.origEmail = email;
+                this.replyEmail.subject = 'Re: '+this.origEmail.subject
+                this.replyEmail.to = this.origEmail.from
+            })
     }
 
 }
