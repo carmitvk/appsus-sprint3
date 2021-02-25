@@ -1,6 +1,6 @@
 
 import { emailService } from '../services/email-service.js'
-// import emailFilter from '../cmps/email-filter.cmp.js'
+import emailFilter from '../cmps/email-filter.cmp.js'
 import emailList from '../cmps/email-list.cmp.js'
 
 export default {
@@ -11,7 +11,7 @@ export default {
                 <button class="btn" @click="openCompose">+compose</button>
             </div>
             <div class="list-container">
-                <!-- <email-filter @filtered="setFilter" @searchInEmail="searchInEmail"></email-filter> -->
+                <email-filter @filtered="setFilter" @sorted="setSort"></email-filter>
                 <email-list :emails="emailsToShow" @removeEmail="removeEmail" @updateStar="updateStar" @updateRead="updateRead"/>
                 <!-- <router-link to="/email/edit">compose</router-link> -->
             </div>
@@ -21,21 +21,22 @@ export default {
         return {
             emails: [],
             filterBy: null,
-            unreadCount:0,
+            sortBy: 'date',
+            unreadCount: 0,
         }
     },
     methods: {
         removeEmail(emailId) {
             emailService.remove(emailId)
-                .then(()=>this.loadEmails())
+                .then(() => this.loadEmails())
         },
-        updateStar(emailId){
+        updateStar(emailId) {
             emailService.updateStar(emailId)
-            .then(()=>this.loadEmails())
+                .then(() => this.loadEmails())
         },
-        updateRead(emailId){
+        updateRead(emailId) {
             emailService.updateRead(emailId)
-            .then(()=>this.loadEmails())
+                .then(() => this.loadEmails())
         },
         loadEmails() {
             emailService.query()
@@ -44,22 +45,45 @@ export default {
         setFilter(filterBy) {
             this.filterBy = filterBy;
         },
-        openCompose(){
+        setSort(sortBy) {
+            this.sortBy = sortBy;
+        },
+        openCompose() {
             this.$router.replace({ path: `/compose` })
         },
 
     },
     computed: {
         emailsToShow() {
-            // if (!this.filterBy || !this.filterBy.name) return this.books
-            // const searchStr = this.filterBy.name.toLowerCase()
-            // const booksToShow = this.books.filter(book => {
-            //     return book.title.toLowerCase().includes(searchStr) &&
-            //         book.listPrice.amount <= this.filterBy.maxPrice &&
-            //         book.listPrice.amount >= this.filterBy.minPrice;
-            // })
-            // return booksToShow;
-            return this.emails; //TODO: sort+filter
+            if (this.sortBy === 'date') {
+                this.emails = this.emails.sort((email1, email2) => email2.sentAt - email1.sentAt)
+            } else {//subject
+                this.emails = this.emails.sort((email1, email2) => {
+                    if (email1.subject < email2.subject) {
+                        return -1
+                    } else {
+                        if (email1.subject > email2.subject) {
+                            return 1
+                        } else {
+                            return 0
+                        }
+                    }
+                })
+            }
+
+            if (!this.filterBy || !this.filterBy.searchTxt) return this.emails //because this case, we should sort first
+            const lowerSearchTxt = this.filterBy.searchTxt.toLowerCase()
+            const isRead = this.filterBy.readStatus === 'read' ? true : false
+
+            const emailsToShow = this.emails.filter(email => {
+                return (email.subject.toLowerCase().includes(lowerSearchTxt)
+                    || email.body.toLowerCase().includes(lowerSearchTxt))
+                    && (
+                        (this.filterBy.readStatus !== 'all' && email.isRead === isRead) ||
+                        (this.filterBy.readStatus === 'all' )
+                    )
+            })
+            return emailsToShow;
         },
 
     },
@@ -68,7 +92,7 @@ export default {
         this.unreadCount = emailService.getUnreadCount();
     },
     components: {
-        // emailFilter,
+        emailFilter,
         emailList,
     }
 }
