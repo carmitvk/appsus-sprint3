@@ -17,12 +17,13 @@ export default {
     data() {
         return {
             emailToAdd: {
-                subject: 'subject',
+                subject: '',
                 body: 'Email body',
                 isRead: false,
                 isStar: false,
                 sentAt: Date.now(),
                 from: 'Me',
+                to:'',
                 isEmail:false
             }
         }
@@ -53,12 +54,4 @@ export default {
                 })
         },
     },  
-    created() {
-        // const id = this.$route.params.emailId;
-        // emailService.getById(id)
-        //     .then((email) => {
-        //         this.email = email;
-        //     })
-    }
-
 }

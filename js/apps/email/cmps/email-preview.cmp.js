@@ -1,4 +1,6 @@
-
+         
+import longText from '../../../cmps/long-text.cmp.js'
+import { emailService } from '../services/email-service.js';
 
 export default {
     props: ['email'],
@@ -7,15 +9,16 @@ export default {
             <span v-if="email.isStar" @click="toggleStar($event,email.id)">★</span>
             <span v-if="!email.isStar" @click="toggleStar($event,email.id)">✰</span>
             <span @click="removeEmail($event,email.id)">🗑</span>
-            <span v-if="email.isRead" @click="toggleRead($event,email.id)">💌</span>
+            <span v-if="email.isRead"  @click="toggleRead($event,email.id)">💌</span>
             <span v-if="!email.isRead" @click="toggleRead($event,email.id)">📧</span>
-            <div class="preview-txt" @click="openEmail">
-                <p>{{email.from}}</p>
+            <div class="preview-txt" v-bind:class="{ bold: !email.isRead }" @click="openEmail">
+                <p >{{email.from}}</p>
                 <p>{{email.subject}}</p>
-                <p>{{sentData}}</p>
+                <long-text :txt="email.body" :title="email.body"/>
+                <p>{{sentDate}}</p>
             </div>
         </section>
-        
+      
         `,
         data(){
             return {
@@ -24,11 +27,12 @@ export default {
         },
 
     computed:{
-        sentData(){
+        sentDate(){
             return new  Date(this.email.sentAt).toLocaleString();
-        },
-        // ☆  ✰ ⭐ ✉ 📨 ✉️ 💌 📧
-        
+        },  
+        fontBold(){
+            return (!this.email.isRead)?'bold':' ';
+        },   
     },
     methods:{
         toggleStar($event,emailId){
@@ -39,13 +43,16 @@ export default {
             this.$emit('updateRead', emailId);
         },
         removeEmail($event,emailId){
-            //if sure , emit
+            //if sure , emit -TODO
             this.$emit('removeEmail', emailId);
         },
         openEmail(){
-            this.$router.replace({ path: `/email/${this.email.id}` })
+            this.$router.replace({ path: `/email/${this.email.id}` });
+            emailService.updateReadFullMode(this.email.id)
+            .then(()=>{ })
         }
-
+    },
+    components:{
+         longText
     }
-
 }

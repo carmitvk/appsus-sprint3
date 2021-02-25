@@ -5,10 +5,10 @@ export default {
     template: `
                 <ul class="email-list " >
                     <li v-for="email in emails" :key="email.id" class="email-preview-container ">
-                        <email-preview :email="email" @removeEmail="remove" @updateStar="updateStar" @updateRead="updateRead"  @click.native="select(email)"/>
+                        <email-preview :email="email" @removeEmail="remove" @updateStar="updateStar" @updateRead="updateRead"  />
+                        <!-- <email-preview :email="email" @removeEmail="remove" @updateStar="updateStar" @updateRead="updateRead"  @click.native="select(email)"/> -->
                         <div class="btns-container">
                         </div>
-
                     </li>
                 </ul>
             `, 
@@ -22,9 +22,12 @@ export default {
                 updateRead(emailId){
                     this.$emit('updateRead', emailId)
                 },
-                select(email) {
-                    this.$emit('selected', email)
-                },
+                // select(email) {
+                    // this.$emit('selected', email)
+                    //carmit decide not to use
+                    
+                    
+                // },
             },
             components:{
                 emailPreview 

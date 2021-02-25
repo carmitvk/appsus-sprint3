@@ -2,6 +2,7 @@
 import { emailService } from '../services/email-service.js'
 import emailFilter from '../cmps/email-filter.cmp.js'
 import emailList from '../cmps/email-list.cmp.js'
+import {eventBus} from '../services/event-bus-service.js'
 
 export default {
     template: `
@@ -28,7 +29,9 @@ export default {
     methods: {
         removeEmail(emailId) {
             emailService.remove(emailId)
-                .then(() => this.loadEmails())
+                .then(() => {
+                    this.loadEmails();
+                })
         },
         updateStar(emailId) {
             emailService.updateStar(emailId)
@@ -36,7 +39,9 @@ export default {
         },
         updateRead(emailId) {
             emailService.updateRead(emailId)
-                .then(() => this.loadEmails())
+                .then(() => {
+                    this.loadEmails();
+                })
         },
         loadEmails() {
             emailService.query()
@@ -51,7 +56,9 @@ export default {
         openCompose() {
             this.$router.replace({ path: `/compose` })
         },
-
+        updateUnreadCount(){
+            this.unreadCount = emailService.getUnreadCount();
+        }
     },
     computed: {
         emailsToShow() {
@@ -89,7 +96,12 @@ export default {
     },
     created() {
         this.loadEmails();
-        this.unreadCount = emailService.getUnreadCount();
+        this.updateUnreadCount();
+        eventBus.$on('unread-changed', this.updateUnreadCount)
+        
+    },
+    destroyed(){
+        eventBus.$off('unread-changed', this.updateUnreadCount)
     },
     components: {
         emailFilter,
