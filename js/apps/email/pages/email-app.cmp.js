@@ -2,31 +2,48 @@
 import { emailService } from '../services/email-service.js'
 import emailFilter from '../cmps/email-filter.cmp.js'
 import emailList from '../cmps/email-list.cmp.js'
-import {eventBus} from '../services/event-bus-service.js'
+import { eventBus } from '../services/event-bus-service.js'
 
 export default {
     template: `
         <section class="email-app app-main">
             <div class="actions">
-                <div>You have {{unreadCount}} unread emails</div>
-                <button class="btn" @click="openCompose">+compose</button>
+                <div class="unread-show bold">{{unreadCount}} unread emails</div>
+                <button class="btn compose-btn" @click="openCompose">+compose</button>
+                <div class="folders-container bold">
+                    <div class="folder" @click="chooseFolder('inbox')">Inbox</div>
+                    <div class="folder" @click="chooseFolder('sentItems')">Sent Items</div>
+                    <div class="folder" @click="chooseFolder('star')">Star</div>
+                </div>
             </div>
             <div class="list-container">
-                <email-filter @filtered="setFilter" @sorted="setSort"></email-filter>
+                <email-filter :filterValues="filterBy" :sortValue="sortBy" @filtered="setFilter" @sorted="setSort"></email-filter>
                 <email-list :emails="emailsToShow" @removeEmail="removeEmail" @updateStar="updateStar" @updateRead="updateRead"/>
-                <!-- <router-link to="/email/edit">compose</router-link> -->
             </div>
         </section>
     `,
     data() {
         return {
             emails: [],
-            filterBy: null,
+            filterBy: {
+                searchTxt: '',
+                readStatus: 'all',
+                folder: 'inbox',
+            },
             sortBy: 'date',
             unreadCount: 0,
+            emailsToShow: [],
         }
     },
     methods: {
+        chooseFolder(selectedFolder) {
+            console.log('inside chooseFolder')
+            this.filterBy.folder = selectedFolder;
+            this.filterBy.searchTxt='';
+            this.filterBy.readStatus='all';
+            this.sortBy= 'date';
+            this.filterEmailsToShow();
+        },
         removeEmail(emailId) {
             emailService.remove(emailId)
                 .then(() => {
@@ -46,26 +63,36 @@ export default {
         loadEmails() {
             emailService.query()
                 .then(emails => this.emails = emails)
+                .then(() => this.initEmailsToShow())
         },
         setFilter(filterBy) {
-            this.filterBy = filterBy;
+            this.filterBy.searchTxt = filterBy.searchTxt;
+            this.filterBy.readStatus = filterBy.readStatus;
+            this.sortBy= 'date';
+            this.filterEmailsToShow();
         },
         setSort(sortBy) {
             this.sortBy = sortBy;
+            this.sortEmailsToShow();
         },
         openCompose() {
             this.$router.replace({ path: `/compose` })
         },
-        updateUnreadCount(){
+        updateUnreadCount() {
             this.unreadCount = emailService.getUnreadCount();
-        }
-    },
-    computed: {
-        emailsToShow() {
+        },
+
+        initEmailsToShow() {
+            console.log('inside initEmailsToShow')
+            this.filterEmailsToShow();
+            this.sortEmailsToShow();
+        },
+
+        sortEmailsToShow() {
             if (this.sortBy === 'date') {
-                this.emails = this.emails.sort((email1, email2) => email2.sentAt - email1.sentAt)
+                this.emailsToShow = this.emailsToShow.sort((email1, email2) => email2.sentAt - email1.sentAt)
             } else {//subject
-                this.emails = this.emails.sort((email1, email2) => {
+                this.emailsToShow = this.emailsToShow.sort((email1, email2) => {
                     if (email1.subject < email2.subject) {
                         return -1
                     } else {
@@ -77,30 +104,36 @@ export default {
                     }
                 })
             }
-
-            if (!this.filterBy || !this.filterBy.searchTxt) return this.emails //because this case, we should sort first
-            const lowerSearchTxt = this.filterBy.searchTxt.toLowerCase()
-            const isRead = this.filterBy.readStatus === 'read' ? true : false
-
-            const emailsToShow = this.emails.filter(email => {
-                return (email.subject.toLowerCase().includes(lowerSearchTxt)
-                    || email.body.toLowerCase().includes(lowerSearchTxt))
-                    && (
-                        (this.filterBy.readStatus !== 'all' && email.isRead === isRead) ||
-                        (this.filterBy.readStatus === 'all' )
-                    )
-            })
-            return emailsToShow;
         },
 
+        filterEmailsToShow() {
+            const lowerSearchTxt = this.filterBy.searchTxt.toLowerCase()
+
+            this.emailsToShow = this.emails.filter((email) => {
+                 var result = (lowerSearchTxt.length === 0 ||
+                    email.subject.toLowerCase().includes(lowerSearchTxt) ||
+                    email.body.toLowerCase().includes(lowerSearchTxt))
+                    && (
+                        (this.filterBy.readStatus !== 'all' && 
+                            (email.isRead === true && this.filterBy.readStatus==='read')||
+                            (email.isRead === false && this.filterBy.readStatus==='unread')) ||
+                        (this.filterBy.readStatus === 'all' )
+                    )&&(
+                        (this.filterBy.folder === 'inbox' && email.isInbox === true)||
+                        (this.filterBy.folder === 'sentItems' && email.isInbox === false)||
+                        (this.filterBy.folder === 'star' && email.isStar === true)
+                    )
+                    return result;
+            })
+        }
     },
     created() {
         this.loadEmails();
         this.updateUnreadCount();
         eventBus.$on('unread-changed', this.updateUnreadCount)
-        
+
     },
-    destroyed(){
+    destroyed() {
         eventBus.$off('unread-changed', this.updateUnreadCount)
     },
     components: {

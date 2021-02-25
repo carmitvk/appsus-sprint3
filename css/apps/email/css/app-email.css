@@ -4,6 +4,7 @@
     flex-direction: row;
     width: 100%;
     flex-wrap: wrap;
+
 }
 
 .actions{
@@ -16,5 +17,38 @@
 .list-container{
     flex-basis:80%;
     padding:20px;
+}
+
+.unread-show{
+    margin-bottom: 30px;;
+    margin-top: 30px;
+
+}
+.compose-btn{
+    margin-bottom: 30px;
+    width: 100px;
+}
+
+.folder{
+    display:flex;
+    background-color: rgb(157, 125, 167);
+    width: 100px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    justify-content:center;
+    align-items: center;
+    opacity:0.9
+}
+
+.folder:hover, .compose-btn:hover{
+    -webkit-box-shadow: 2px 2px 13px -2px #000000; 
+    box-shadow: 2px 2px 13px -2px #000000;
+}
+
+
+.folders-container{
+    display:flex;
+    flex-direction: column;
+
 }
 

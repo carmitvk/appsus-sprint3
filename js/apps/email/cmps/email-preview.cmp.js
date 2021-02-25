@@ -6,16 +6,16 @@ export default {
     props: ['email'],
     template: `
         <section class="email-preview grid">
-            <span v-if="email.isStar" @click="toggleStar($event,email.id)">★</span>
-            <span v-if="!email.isStar" @click="toggleStar($event,email.id)">✰</span>
+            <span class="star" v-if="email.isStar" @click="toggleStar($event,email.id)">★</span>
+            <span class="star" v-if="!email.isStar" @click="toggleStar($event,email.id)">✰</span>
             <span @click="removeEmail($event,email.id)">🗑</span>
             <span v-if="email.isRead"  @click="toggleRead($event,email.id)">💌</span>
             <span v-if="!email.isRead" @click="toggleRead($event,email.id)">📧</span>
             <div class="preview-txt" v-bind:class="{ bold: !email.isRead }" @click="openEmail">
-                <p >{{email.from}}</p>
-                <p>{{email.subject}}</p>
-                <long-text :txt="email.body" :title="email.body"/>
-                <p>{{sentDate}}</p>
+                <p class="from">{{email.from}}</p>
+                <p class="subject">{{email.subject}}</p>
+                <long-text class="body" :txt="email.body" :title="email.body"/>
+                <p class="sentDate">{{sentDate}}</p>
             </div>
         </section>
       

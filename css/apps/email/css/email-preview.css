@@ -2,14 +2,21 @@
     margin-bottom: 10px;
 }
 
+
+.email-preview-container:hover{
+    -webkit-box-shadow: 2px 3px 10px 2px rgba(0,0,0,0.47); 
+    box-shadow: 2px 3px 10px 2px rgba(0,0,0,0.47);
+}
 .email-preview{
     width:100%;
     align-items: center;
     /* -webkit-box-shadow: 5px 5px 6px -2px #000000; 
     box-shadow: 5px 5px 6px -2px #000000; */
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid rgb(192, 190, 190);
 }
-
+.star{
+    margin-right: 10px;
+}
 
 .grid{
     display: grid;
@@ -27,6 +34,17 @@
 .bold{
     font-weight: bold;
 }
+.from{
+    flex-basis:15%
+}
 
-
+.subject{
+    flex-basis:27%
+}
+.body{
+    flex-basis:36%
+}
+.sentDate{
+    flex-basis:22%
+}
 

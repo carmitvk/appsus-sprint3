@@ -24,7 +24,7 @@ export default {
                 isStar: false,
                 sentAt: Date.now(),
                 from: 'Me',
-                isEmail:false
+                isInbox:false
             }
         }
     },

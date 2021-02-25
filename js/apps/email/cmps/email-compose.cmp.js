@@ -5,11 +5,11 @@ import { eventBus } from  "../../../services/event-bus-service.js";
 export default {
     template: `
             <section class="email-compose">
-            <form @submit.prevent="save">
-                <input type="text" placeholder="Subject: " v-model="emailToAdd.subject">
-                <input type="text" placeholder="To: " v-model="emailToAdd.to">
-                <textarea name="email-body:    " rows="10" cols="500" v-model="emailToAdd.body"></textarea>
-                <button class="btn">Send</button>
+            <form class="compose-container" @submit.prevent="save">
+                <input class="composed-sub" type="text" placeholder="Subject: " v-model="emailToAdd.subject">
+                <input class="composed-to" type="text" placeholder="To: " v-model="emailToAdd.to">
+                <textarea class="composed-txt" name="email-body:    " rows="10" cols="500" v-model="emailToAdd.body"></textarea>
+                <button class="btn composed-btn">Send</button>
             </form>
             </section>
             `,
@@ -24,7 +24,7 @@ export default {
                 sentAt: Date.now(),
                 from: 'Me',
                 to:'',
-                isEmail:false
+                isInbox:false
             }
         }
     },

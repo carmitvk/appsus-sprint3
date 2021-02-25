@@ -4,6 +4,8 @@
 @import "css/email-list.css";
 @import "css/email-preview.css";
 @import "css/home-page.css";
+@import "css/email-filter.css";
+@import "css/email-compose.css";
 
 
 .app-main {
@@ -14,5 +16,16 @@
 .btn{
     cursor: pointer;
     border-radius: 5px;
-    background-color: rgb(204, 196, 201);;
+    background-color: rgb(204, 184, 196);;
+    
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 450;
+    line-height: 1.3;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 4px;
 }
