@@ -8,7 +8,7 @@ export default {
             <form @submit.prevent="save">
                 <div>To: {{replyEmail.to}}</div>
                 <div>Subject: {{replyEmail.subject}}</div>
-                <textarea name="email-body:    " rows="10" cols="500" v-model="replyEmail.body"></textarea>
+                <textarea name="email-body:    " rows="10" cols="100" v-model="replyEmail.body"></textarea>
                 <button class="btn">Send</button>
             </form>
             </section>
@@ -34,7 +34,8 @@ export default {
                 .then(emails => this.emails = emails)
         },
         save() {
-            this.replyEmail.body =  'Orig Message was: '.concat(this.origEmail.body);
+            
+            console.log('this.replyEmail.body',this.replyEmail.body)
             emailService.save(this.replyEmail)
                 .then(email => {
                     const msg = {
@@ -65,6 +66,7 @@ export default {
                 this.origEmail = email;
                 this.replyEmail.subject = 'Re: '+this.origEmail.subject
                 this.replyEmail.to = this.origEmail.from
+                this.replyEmail.body =  '\n\n\n\n\n\n\n'+'Orig Message was: '+this.origEmail.body;
             })
     }
 
