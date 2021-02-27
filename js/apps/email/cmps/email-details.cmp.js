@@ -9,8 +9,7 @@ export default {
                 <div>From: {{email.from}}</div>
                 <div>To: {{email.to}}</div>
                 <div>Sent At: {{sentData}}</div>
-                <div><pre>Email body: {{email.body}}</pre></div>
-                
+                <div class="details-body">{{email.body}}</div>
                 <router-link to="/email">Back To Emails</router-link>
                 </div>
             </section>

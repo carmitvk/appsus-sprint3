@@ -79,5 +79,15 @@ h1, h2, h3, h4, h5, h6, p {
     .preview-txt>*{
         margin-right: 5px;
     }
+    .composed-sub, .composed-to{
+        width: 200px;
+    }
+    .composed-btn{
+        width:100px;
+    }
+    .home-page{
+        font-size:25px;
+    }
+
 }
 
