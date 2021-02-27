@@ -3,6 +3,7 @@ import { emailService } from "../services/email-service.js";
 export default {
     template: `
             <section v-if="email" class="email-details" >
+                <div class="email-details-container">
                 <button class="btn" title="Reply" @click="reply">↷</button>
                 <div>Subject: {{email.subject}}</div>
                 <div>From: {{email.from}}</div>
@@ -11,6 +12,7 @@ export default {
                 <div><pre>Email body: {{email.body}}</pre></div>
                 
                 <router-link to="/email">Back To Emails</router-link>
+                </div>
             </section>
             `,
 

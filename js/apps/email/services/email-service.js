@@ -2,11 +2,11 @@
 
 import { storageService } from '../../../services/async-storage-service.js'
 import { utilService } from '../../../services/util-service.js'
-import {eventBus} from './event-bus-service.js'
+// import {eventBus} from './event-bus-service.js'
 
 
-var gUnreadEmails=0;
 
+var isStartApp =true;
 const INBOX_EMAILS_KEY = 'inbox_emails'
 const gInboxEmails = [
                     {id:'XXXXX', subject: 'Wassap?',  body: 'Hurry To Pick up!',      isRead: true, isStar:false, sentAt : 1551133930594,from:'Nati Golan',to:'Yoni Dalal',isInbox:true},
@@ -23,7 +23,6 @@ export const emailService = {
   getById,
   getNextEmailId,
   getPrevEmailId,
-  getUnreadCount,
   updateStar,
   updateRead,
   updateReadFullMode,
@@ -32,17 +31,12 @@ export const emailService = {
 function query() {
   return storageService.query(INBOX_EMAILS_KEY)
     .then(emails=> {
-      if (!emails||!emails.length){
+      if ((!emails||!emails.length)&&isStartApp){
         emails = gInboxEmails;
-        utilService.saveToStorage(INBOX_EMAILS_KEY,gInboxEmails)
+        utilService.saveToStorage(INBOX_EMAILS_KEY,gInboxEmails);
       }
 
-      gUnreadEmails = emails.reduce((acc, email) => {
-        if (!email.isRead) {
-          acc++;
-        }
-        return acc;
-      },0)
+      isStartApp=false;
     return emails;
     });
 }
@@ -50,10 +44,6 @@ function query() {
 function remove(emailId) {
   return getById(emailId)
   .then((email)=>{
-    if (!email.isRead){
-      gUnreadEmails--;
-      eventBus.$emit('unread-changed');
-    }
     return storageService.remove(INBOX_EMAILS_KEY, emailId);
   })
 }
@@ -84,8 +74,6 @@ function save(email) {
   if (email.id) { //edit
     return storageService.put(INBOX_EMAILS_KEY, email)
   } else {
-    gUnreadEmails++;
-    eventBus.$emit('unread-changed');
     return storageService.post(INBOX_EMAILS_KEY, email)//new
   }
 }
@@ -114,8 +102,6 @@ function _markAsUnread(id){
     return getById(id)
     .then((email)=>{
       email.isRead = false;
-      gUnreadEmails++;
-      eventBus.$emit('unread-changed');
       return storageService.put(INBOX_EMAILS_KEY, email)
     })
 }
@@ -124,33 +110,14 @@ function _markAsRead(id){
     return getById(id)
     .then((email)=>{
       email.isRead = true;
-      gUnreadEmails--;
-      eventBus.$emit('unread-changed');
       return storageService.put(INBOX_EMAILS_KEY, email)
     })
 }
-
-function getUnreadCount(){
-  return gUnreadEmails
-}
-
-// function increaseUnreadCount(){
-//   gUnreadEmails++;
-//   eventBus.$emit('unread-changed');
-// }
-
-// function reduceUnreadCount(){
-//   gUnreadEmails--;
-//   eventBus.$emit('unread-changed');
-// }
-
 
 function updateReadFullMode(id){
   return getById(id)
   .then((email)=>{
     email.isRead = true;
-    gUnreadEmails--;
-    eventBus.$emit('unread-changed');
     return storageService.put(INBOX_EMAILS_KEY, email);
   })
 }

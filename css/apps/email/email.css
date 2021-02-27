@@ -6,11 +6,15 @@
 @import "css/home-page.css";
 @import "css/email-filter.css";
 @import "css/email-compose.css";
+@import "css/email-details.css";
 
 
 .app-main {
     background-color: lightblue;
     min-height: 90vh;
+}
+body{
+    font-family: 'Times New Roman', Times, serif;
 }
 
 .btn{

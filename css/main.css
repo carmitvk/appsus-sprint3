@@ -37,4 +37,47 @@ h1, h2, h3, h4, h5, h6, p {
 
 
 
+@media (max-width: 740px){
+    body{
+        width: 100%;
+        padding:0;
+        margin:0;
+    }
+    .email-app{
+        flex-direction: column;
+        padding:5px;   
+        width: 100%;
+    }
+    .email-filter{
+        width: 100%;
+        display:flex;
+  
+    }
+    .criteria-container{
+        width: 100%;
+        display:flex;
+        flex-direction: column;
+    }
+    .filter-container{
+        justify-content: flex-start;
+        width:100%
+    }
+    .list-container, .actions{
+        padding:0;
+    }
+    .grid {
+        display: grid;
+        grid-template-columns: 15px 10px 12px auto;
+        grid-auto-rows: auto;
+        gap: 10px;
+    }
+    .preview-txt{
+        display:flex;
+        justify-content: space-around;
+        margin-left: 5px;
+    }
+    .preview-txt>*{
+        margin-right: 5px;
+    }
+}
 

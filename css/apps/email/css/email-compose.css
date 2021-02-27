@@ -1,1 +1,35 @@
 
+.compose-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    /* align-items: center; */
+    border: 1px solid gray;
+    -webkit-box-shadow: 2px 2px 13px -2px rgba(0,0,0,0.64); 
+    box-shadow: 2px 2px 13px -2px rgba(0,0,0,0.64);
+    margin-top:10px;
+    
+}
+
+
+.email-compose{
+    display: flex;
+    justify-content: center;
+}
+
+.email-compose>*{
+    width: 80%;
+    height: 85vh;
+}
+
+.composed-btn{
+width:150px;
+}
+
+.composed-sub, .composed-to{
+    width: 400px;
+}
+
+.composed-txt{
+    margin: 0.2px;
+}

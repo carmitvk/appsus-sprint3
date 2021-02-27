@@ -2,7 +2,7 @@
 import { emailService } from '../services/email-service.js'
 import emailFilter from '../cmps/email-filter.cmp.js'
 import emailList from '../cmps/email-list.cmp.js'
-import { eventBus } from '../services/event-bus-service.js'
+// import { eventBus } from '../services/event-bus-service.js'
 
 export default {
     template: `
@@ -11,10 +11,12 @@ export default {
                 <div class="unread-show bold">{{unreadCount}} unread emails</div>
                 <button class="btn compose-btn" @click="openCompose">+compose</button>
                 <div class="folders-container bold">
-                    <div class="folder" @click="chooseFolder('inbox')">Inbox</div>
-                    <div class="folder" @click="chooseFolder('sentItems')">Sent Items</div>
-                    <div class="folder" @click="chooseFolder('star')">Star</div>
+                    <div v-bind:class="{ active: filterBy.folder ==='inbox' }"  class="folder" @click="chooseFolder('inbox')">Inbox</div>
+                    <div v-bind:class="{ active: filterBy.folder ==='sentItems' }" class="folder" @click="chooseFolder('sentItems')">Sent Items</div>
+                    <div v-bind:class="{ active: 
+                        filterBy.folder ==='star' }" class="folder" @click="chooseFolder('star')">Star</div>
                 </div>
+                <!-- <email-status :percent="computePercent" /> -->
             </div>
             <div class="list-container">
                 <email-filter :filterValues="filterBy" :sortValue="sortBy" @filtered="setFilter" @sorted="setSort"></email-filter>
@@ -78,9 +80,6 @@ export default {
         openCompose() {
             this.$router.replace({ path: `/compose` })
         },
-        updateUnreadCount() {
-            this.unreadCount = emailService.getUnreadCount();
-        },
 
         initEmailsToShow() {
             console.log('inside initEmailsToShow')
@@ -125,17 +124,28 @@ export default {
                     )
                     return result;
             })
+            this.unreadCount = this.emailsToShow.reduce((acc,email)=>{
+                if (!email.isRead){
+                    acc++;
+                }
+                return acc;
+            },0)
         }
     },
     created() {
         this.loadEmails();
-        this.updateUnreadCount();
-        eventBus.$on('unread-changed', this.updateUnreadCount)
+        // this.updateUnreadCount();
+        // eventBus.$on('unread-changed', this.updateUnreadCount)
 
     },
-    destroyed() {
-        eventBus.$off('unread-changed', this.updateUnreadCount)
-    },
+    // destroyed() {
+    //     // eventBus.$off('unread-changed', this.updateUnreadCount)
+    // },
+    // computed: {
+    //     percent(){
+    //         return (this.emails.length - unreadCount)*100/this.emailsToShow.length
+    //     }
+    // },
     components: {
         emailFilter,
         emailList,

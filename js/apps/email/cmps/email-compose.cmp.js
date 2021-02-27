@@ -8,7 +8,7 @@ export default {
             <form class="compose-container" @submit.prevent="save">
                 <input class="composed-sub" type="text" placeholder="Subject: " v-model="emailToAdd.subject">
                 <input class="composed-to" type="text" placeholder="To: " v-model="emailToAdd.to">
-                <textarea class="composed-txt" name="email-body:    " rows="10" cols="500" v-model="emailToAdd.body"></textarea>
+                <textarea class="composed-txt" name="email-body:    " rows="26" cols="100" v-model="emailToAdd.body"></textarea>
                 <button class="btn composed-btn">Send</button>
             </form>
             </section>
@@ -19,7 +19,7 @@ export default {
             emailToAdd: {
                 subject: '',
                 body: 'Email body',
-                isRead: false,
+                isRead: true,
                 isStar: false,
                 sentAt: Date.now(),
                 from: 'Me',

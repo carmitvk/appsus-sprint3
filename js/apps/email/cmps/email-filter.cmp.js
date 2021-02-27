@@ -6,7 +6,7 @@ export default {
     <section class="email-filter">
         <div class="criteria-container">
         <form @submit.prevent="setFilter" class="filter-container">
-            <label class="criteria-lable"> Search an email: </label>    
+            <label class="criteria-lable"> Search: </label>    
             <input class="search-txt" type="text" placeholder="Search text in body/subject...." v-model="filterValues.searchTxt">
             <select class="read-sts" name="readStatus" id="readStatus" v-model="filterValues.readStatus">
                 <option selected="selected" value="all">All</option>
