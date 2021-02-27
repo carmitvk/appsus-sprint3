@@ -4,7 +4,8 @@
     flex-direction: row;
     width: 100%;
     flex-wrap: wrap;
-
+    background-image: url('../../../../img/images2.jpg');
+    background-size:cover;
 }
 
 .actions{

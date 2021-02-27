@@ -9,9 +9,25 @@ import { utilService } from '../../../services/util-service.js'
 var isStartApp =true;
 const INBOX_EMAILS_KEY = 'inbox_emails'
 const gInboxEmails = [
-                    {id:'XXXXX', subject: 'Wassap?',  body: 'Hurry To Pick up!',      isRead: true, isStar:false, sentAt : 1551133930594,from:'Nati Golan',to:'Yoni Dalal',isInbox:true},
+                    {id:'XXXXX', subject: 'Whatsup?',  body: 'Hurry To Pick up!',      isRead: true, isStar:false, sentAt : 1551133930594,from:'Nati Golan',to:'Yoni Dalal',isInbox:true},
                     {id:'YYYYY', subject: 'Team meeting for the two teams', body: 'where are you? long time no seen. we have a team meeting for the two teams. you re invited. please dont be late. come to meeting room number2. it will be very teaching', isRead: false,  isStar:true,  sentAt : 1521133930594,from:'Shlomi Levi',to:'Ronit Band',isInbox:true},
-                    {id:'ZZZZZ', subject: 'Hello from me',    body: 'long time',     isRead: true, isStar:false, sentAt : 1951133930594,from:'Elad Davidi',to:'Miri Cohen',isInbox:true}
+                    {id:'ZZZZZ', subject: 'Hello from me',    body: 'long time',     isRead: true, isStar:false, sentAt : 1951133930594,from:'Elad Davidi',to:'Miri Cohen',isInbox:true},
+                    {id:'AAAAA', subject: 'how r u?',  body: 'Hurry To Pick up!',      isRead: true, isStar:false, sentAt : 1551133930594,from:'Nati Golan',to:'Yehuda Dalal',isInbox:true},
+                    {id:'BBBBB', subject: 'meeting', body: 'where are you? long time no seen. we have a team meeting for the two teams. you re invited. please dont be late. come to meeting room number2. it will be very teaching', isRead: false,  isStar:true,  sentAt : 1521133930594,from:'Shlomi Levi',to:'Ronit Band',isInbox:true},
+                    {id:'CCCCC', subject: 'family party',    body: 'long time',     isRead: true, isStar:false, sentAt : 1951133930594,from:'Gad Davidi',to:'Miri Cohen',isInbox:true},
+                    {id:'DDDDD', subject: 'coming for a visit',  body: 'hi. i will come tomorrow to meet u',      isRead: true, isStar:false, sentAt : 1551133930594,from:'Shimi Golan',to:'Yoni Dalal',isInbox:true},
+                    {id:'EEEEE', subject: 'neighbours meeting', body: 'we are having a meeting for all neighbours. you are invited. please dont be late.', isRead: false,  isStar:true,  sentAt : 1521133930594,from:'Orli Levi',to:'Moti Band',isInbox:true},
+                    {id:'FFFFF', subject: 'Hello from me',    body: 'long time',     isRead: true, isStar:false, sentAt : 1951133930594,from:'Elad Davidi',to:'Miri Cohen',isInbox:true},
+                    {id:'GGGGG', subject: 'Wassap?',  body: 'Hurry To Pick up!',      isRead: true, isStar:false, sentAt : 1551133930594,from:'Nati Golan',to:'Yoni Dalal',isInbox:true},
+                    {id:'HHHHH', subject: 'Team meeting for the two teams', body: 'where are you? long time no seen. we have a team meeting for the two teams. you re invited. please dont be late. come to meeting room number2. it will be very teaching', isRead: false,  isStar:true,  sentAt : 1521133930594,from:'Ido Levi',to:'Ronit Band',isInbox:true},
+                    {id:'IIIII', subject: 'Hello from me',    body: 'long time',     isRead: true, isStar:false, sentAt : 1951133930594,from:'Elad Davidi',to:'Miri Cohen',isInbox:true},
+                    {id:'JJJJJ', subject: 'remember?',  body: 'you have an appointment!',      isRead: true, isStar:false, sentAt : 1551133930594,from:'Nati Golan',to:'Yoni Dalal',isInbox:true},
+                    {id:'KKKKK', subject: 'Team meeting for the two teams', body: 'where are you? long time no seen. we have a team meeting for the two teams. you re invited. please dont be late. come to meeting room number2. it will be very teaching', isRead: false,  isStar:true,  sentAt : 1521133930594,from:'Shlomi Dalal',to:'Ronit Ben',isInbox:true},
+                    {id:'MMMMM', subject: 'Hello from yan',    body: 'i have a new job. wellcome to come visit',     isRead: true, isStar:false, sentAt : 1951133930594,from:'Yan Davidi',to:'Miri Aharoni',isInbox:true}
+
+
+
+
 ];
 
 
