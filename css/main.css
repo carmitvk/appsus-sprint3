@@ -88,6 +88,12 @@ h1, h2, h3, h4, h5, h6, p {
     .home-page{
         font-size:25px;
     }
+    textarea {
+        width: 265px;
+        height: 250px;
+      }
+
+
     /* .menu-btn{
         display:flex
     } */

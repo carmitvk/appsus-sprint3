@@ -8,7 +8,7 @@ export default {
             <form class="email-reply-container" @submit.prevent="save">
                 <div>To: {{replyEmail.to}}</div>
                 <div>Subject: {{replyEmail.subject}}</div>
-                <textarea class="email-body" name="email-body:    " rows="26" cols="145" v-model="replyEmail.body"></textarea>
+                <textarea class="email-body" name="email-body:    "rows="26" cols="145" v-model="replyEmail.body"></textarea>
                 <div><button class="btn">Send</button></div>
             </form>
             </section>
@@ -67,7 +67,7 @@ export default {
                 this.replyEmail.subject = 'Re: '+this.origEmail.subject
                 this.replyEmail.to = this.origEmail.from
                 this.replyEmail.body =  '\n\n\n\n\n'+
-                '------------------------ Orig Message ------------------------\n'+this.origEmail.body;
+                '---------- Orig Message ----------\n'+this.origEmail.body;
             })
     }
 
