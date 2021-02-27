@@ -1,0 +1,36 @@
+
+.col-spaces{
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.rounded-circle {
+    border-radius: 50%;
+}
+.mx-auto {
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 70px;
+    width: 150px;
+}
+.text-muted {
+    color: #868e96 !important;
+}
+.flex-align-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.about-description {
+    max-width: 80%;
+    color: #343a40;
+    margin-top: 10px;
+}
+
+.about{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
