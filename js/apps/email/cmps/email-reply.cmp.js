@@ -5,11 +5,11 @@ import { eventBus } from  "../../../services/event-bus-service.js";
 export default {
     template: `
             <section v-if="origEmail" class="email-reply">
-            <form @submit.prevent="save">
+            <form class="email-reply-container" @submit.prevent="save">
                 <div>To: {{replyEmail.to}}</div>
                 <div>Subject: {{replyEmail.subject}}</div>
-                <textarea name="email-body:    " rows="10" cols="100" v-model="replyEmail.body"></textarea>
-                <button class="btn">Send</button>
+                <textarea class="email-body" name="email-body:    " rows="26" cols="145" v-model="replyEmail.body"></textarea>
+                <div><button class="btn">Send</button></div>
             </form>
             </section>
             `,
@@ -66,7 +66,8 @@ export default {
                 this.origEmail = email;
                 this.replyEmail.subject = 'Re: '+this.origEmail.subject
                 this.replyEmail.to = this.origEmail.from
-                this.replyEmail.body =  '\n\n\n\n\n\n\n'+'Orig Message was: '+this.origEmail.body;
+                this.replyEmail.body =  '\n\n\n\n\n'+
+                '------------------------ Orig Message ------------------------\n'+this.origEmail.body;
             })
     }
 
