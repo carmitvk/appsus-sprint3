@@ -88,6 +88,22 @@ h1, h2, h3, h4, h5, h6, p {
     .home-page{
         font-size:25px;
     }
+    /* .menu-btn{
+        display:flex
+    } */
+    /* nav{
+        display:flex;
+        flex-direction: column;
+        background-color: rgb(196, 189, 189); 
+        justify-content: center;
+        align-items: center;
 
+        position: absolute;
+        top:2vh;
+        right: 6%;
+        z-index:999;
+        height: 50%;
+        width: 150px;
+    } */
 }
 

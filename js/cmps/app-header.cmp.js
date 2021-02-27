@@ -5,6 +5,7 @@ export default {
         <div class="hdr">
             <h1 class="logo">Appsus</h1>
         </div>
+        <!-- <button class="menu-btn" onclick="onMenuClicked()">☰</button> -->
         <nav>
             <router-link active-class="active-link" to="/" exact>Home</router-link> |
             <router-link to="/email">Email</router-link> |
